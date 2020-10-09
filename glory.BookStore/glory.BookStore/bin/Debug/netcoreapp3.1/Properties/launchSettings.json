@@ -14,7 +14,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
+    },  
     "glory.BookStore": { //for  kestrel
       "commandName": "Project",
       "launchBrowser": true,

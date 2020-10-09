@@ -1,0 +1,96 @@
+﻿@using glory.BookStore.Enums;
+@model BookModel
+@{
+    ViewData["Title"] = "Add new book";
+}
+<div class="container">
+    <h3 class="display-4">Add new book</h3>
+    <hr />
+    @if (ViewBag.isSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Başarılı!</strong>Kitap eklendi. <a asp-controller="book" asp-action="getbook" asp-route-id="@ViewBag.bookId">detayı göster</a>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status" id="myLoader" style="display:none">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <form method="post" enctype="multipart/form-data" asp-action="addnewbook" asp-controller="book" data-ajax="true" data-ajax-complete="myComplete" data-ajax-success="mySuccess" data-ajax-failure="myFailure" data-ajax-loader="#myLoader">
+        <!--data ajax true jquery ajax unobstrusive-->
+        <div asp-validation-summary="ModelOnly" class="btn-danger">
+            <!--modelstate error messagge-->
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="LanguageId" class="text-danger"></span>
+            <select asp-for="LanguageId" asp-items="ViewBag.Language" class="form-control">
+                <option value="">bir dil  seçin.</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <span asp-validation-for="Title" class="text-danger"></span>
+            <input asp-for="Title" placeholder="Title..." class="form-control" />
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="Author" class="text-danger"></span>
+            <input asp-for="Author" placeholder="Author..." class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="Description" class="text-danger"></span>
+            <textarea asp-for="Description" placeholder="Description..." class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="TotalPages" class="text-danger"></span>
+            <input asp-for="TotalPages" placeholder="Total Pages..." class="form-control" />
+
+        </div>
+
+        <div class="form-group">
+            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+            <div class="form-group">
+                <input asp-for="CoverPhoto" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+            <div class="form-group">
+                <input asp-for="GalleryFiles" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span asp-validation-for="BookPdf" class="text-danger"></span>
+            <div class="form-group">
+                <input asp-for="BookPdf" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <input type="submit" value="add book" class="btn btn-success" />
+        </div>
+
+    </form>
+</div>
+
+@section scripts{
+    <script>
+        myComplete = (data) => {
+            alert("i am from complete");
+        }
+        mySuccess = (data) => {
+            alert("i am from success");
+        }
+        myFailure = (data) => {
+            alert("i am from failure");
+        }
+
+    </script>
+}
