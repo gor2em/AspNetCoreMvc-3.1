@@ -81,10 +81,15 @@ namespace glory.BookStore
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.AddScoped<IAccountRepository, AccounRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailService, EmailService>(); //#105
+
 
 
             //#101
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
+
+            //#104
+            services.Configure<SMTPConfigModel>(_configuration.GetSection("SMTPConfig"));
 
 
         }

@@ -11,7 +11,7 @@ namespace glory.BookStore.Repository
     {
         Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
         Task<SignInResult> PasswordSignInAsync(SignInModel signInModel);
-
+        Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model);
         Task SignOutAsync();
     }
 }
