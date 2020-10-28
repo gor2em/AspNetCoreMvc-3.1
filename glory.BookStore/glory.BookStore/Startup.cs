@@ -7,6 +7,7 @@ using glory.BookStore.Data;
 using glory.BookStore.Helpers;
 using glory.BookStore.Models;
 using glory.BookStore.Repository;
+using glory.BookStore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -79,6 +80,7 @@ namespace glory.BookStore
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.AddScoped<IAccountRepository, AccounRepository>();
+            services.AddScoped<IUserService, UserService>();
 
 
             //#101
