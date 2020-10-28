@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using glory.BookStore.Data;
+using glory.BookStore.Helpers;
 using glory.BookStore.Models;
 using glory.BookStore.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -79,6 +80,9 @@ namespace glory.BookStore
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.AddScoped<IAccountRepository, AccounRepository>();
 
+
+            //#101
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
 
 
         }

@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace glory.BookStore.Controllers
 {
-    [Route("~/")]
-
     
     public class HomeController:Controller
     {

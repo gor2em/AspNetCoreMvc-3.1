@@ -5,7 +5,7 @@
 @if (_signInManager.IsSignedIn(User))
 {
         <button class="btn btn-outline-info my-2 my-sm-0 m-2" style="cursor:default">
-            Merhaba @User.Identity.Name
+            Merhaba  @(User.FindFirst("UserFirstName").Value+" "+User.FindFirst("UserLastName").Value)  <!--#101-->
         </button>
         <button class="btn btn-outline-danger my-2 my-sm-0 m-2" asp-action="logout" asp-controller="account">
             çıkış yap
