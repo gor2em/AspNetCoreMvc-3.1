@@ -40,7 +40,7 @@ namespace glory.BookStore
 
             services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));  //connection string hard code silindi #82
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<BookStoreContext>(); //#91
+                .AddEntityFrameworkStores<BookStoreContext>().AddDefaultTokenProviders(); //#91 - #108 token
 
 
             //#95 identity options

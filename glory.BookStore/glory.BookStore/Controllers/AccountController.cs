@@ -40,6 +40,7 @@ namespace glory.BookStore.Controllers
                     return View(userModel);
                 }
                 ModelState.Clear();
+                return RedirectToAction("ConfirmEmail", new { email = userModel.Email });
             }
             return View();
         }
@@ -110,5 +111,47 @@ namespace glory.BookStore.Controllers
             return View(model);
         }
 
+        //#109
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(string uid,string token,string email)
+        {
+            EmailConfirmModel model = new EmailConfirmModel
+            {
+                Email = email
+            };
+            if (!string.IsNullOrEmpty(uid) && !string.IsNullOrEmpty(token))
+            {
+                token = token.Replace(' ','+');//space yerine +
+                var result = await _accountRepository.ConfirmEmailAsync(uid,token);
+                if (result.Succeeded)
+                {
+                    model.EmailVerified = true;
+                }
+            }
+            return View(model);
+        }
+
+        //#110
+        [HttpPost("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(EmailConfirmModel model)
+        {
+            var user = await _accountRepository.GetUserByEmailAsync(model.Email);
+            if (user != null)
+            {
+                if (user.EmailConfirmed)
+                {
+                    model.EmailVerified = true;
+                    return View(model);
+                }
+                await _accountRepository.GenerateEmailConfirmationTokenAsync(user);
+                model.EmailSent = true;
+                ModelState.Clear();
+            }
+            else
+            {
+                ModelState.AddModelError("", "bir şeyler ters gitti");
+            }
+            return View(model);
+        }
     }
 }

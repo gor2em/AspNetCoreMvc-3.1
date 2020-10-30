@@ -24,6 +24,12 @@ namespace glory.BookStore.Services
             userEmailOptions.Body = UpdatePlaceHolders(GetEmailBody("TestEmail"),userEmailOptions.PlaceHolders);
             await SendEmail(userEmailOptions);
         }
+        public async Task SendEmailForEmailConfirmation(UserEmailOptions userEmailOptions)
+        {
+            userEmailOptions.Subject = UpdatePlaceHolders("hello {{UserName}}, mail id onayla", userEmailOptions.PlaceHolders);
+            userEmailOptions.Body = UpdatePlaceHolders(GetEmailBody("EmailConfirm"), userEmailOptions.PlaceHolders);
+            await SendEmail(userEmailOptions);
+        }
         public EmailService(IOptions<SMTPConfigModel> smtpConfig)
         {
             _sMTPConfig = smtpConfig.Value;
