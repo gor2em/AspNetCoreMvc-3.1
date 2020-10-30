@@ -53,6 +53,9 @@ namespace glory.BookStore
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
 
+                //#107
+                options.SignIn.RequireConfirmedEmail = true;
+
             });
 
             //#99 redirect user login page
@@ -90,6 +93,9 @@ namespace glory.BookStore
 
             //#104
             services.Configure<SMTPConfigModel>(_configuration.GetSection("SMTPConfig"));
+
+
+
 
 
         }

@@ -66,7 +66,14 @@ namespace glory.BookStore.Controllers
                     }
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("", "hata!");
+                if (result.IsNotAllowed)
+                {
+                    ModelState.AddModelError("", "e mail adresini onaylamadınız.");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "hata!");
+                }
             }
             return View(signInModel);
         }

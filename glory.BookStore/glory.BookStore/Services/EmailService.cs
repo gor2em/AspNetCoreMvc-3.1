@@ -14,14 +14,14 @@ namespace glory.BookStore.Services
     public class EmailService : IEmailService
     {
         //#104
-        private const string templatePath = "EmailTemplate/TestEmail.html";
+        private const string templatePath = "EmailTemplate/{0}.html";
 
         private readonly SMTPConfigModel _sMTPConfig;
 
         public async Task SendTestEmail(UserEmailOptions userEmailOptions)
         {
-            userEmailOptions.Subject = "this is test email subject from glory";
-            userEmailOptions.Body = GetEmailBody("Test Email");
+            userEmailOptions.Subject = UpdatePlaceHolders("hello {{UserName}}, this is email from subject from bookstore.",userEmailOptions.PlaceHolders);
+            userEmailOptions.Body = UpdatePlaceHolders(GetEmailBody("TestEmail"),userEmailOptions.PlaceHolders);
             await SendEmail(userEmailOptions);
         }
         public EmailService(IOptions<SMTPConfigModel> smtpConfig)
@@ -58,6 +58,21 @@ namespace glory.BookStore.Services
         {
             var body = File.ReadAllText(string.Format(templatePath, templateName));
             return body;
+        }
+
+        private string UpdatePlaceHolders(string text, List<KeyValuePair<string, string>> keyValuePairs)
+        {
+            if (!string.IsNullOrEmpty(text) && keyValuePairs != null)
+            {
+                foreach (var placheolder in keyValuePairs)
+                {
+                    if (text.Contains(placheolder.Key))
+                    {
+                        text = text.Replace(placheolder.Key,placheolder.Value);
+                    }
+                }
+            }
+            return text;
         }
     }
 }

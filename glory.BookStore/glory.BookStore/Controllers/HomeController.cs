@@ -26,11 +26,15 @@ namespace glory.BookStore.Controllers
         public async Task<ViewResult> Index()
         {
             //#105
-            UserEmailOptions options = new UserEmailOptions()
-            {
-                ToEmails = new List<string> { "test@gmail.com" }
-            };
-            await _emailService.SendTestEmail(options);
+            //UserEmailOptions options = new UserEmailOptions()
+            //{
+            //    ToEmails = new List<string> { "test@gmail.com" },
+            //    PlaceHolders = new List<KeyValuePair<string, string>>
+            //    {
+            //        new KeyValuePair<string, string>("{{UserName}}","GLORY")
+            //    }
+            //};
+            //await _emailService.SendTestEmail(options);
 
             //var userId = _userService.GetUserId();//#102
             //var isLoggedIn = _userService.IsAuthenticated();
