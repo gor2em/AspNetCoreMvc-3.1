@@ -7,5 +7,6 @@ namespace glory.BookStore.Services
     {
         Task SendEmailForEmailConfirmation(UserEmailOptions userEmailOptions);
         Task SendTestEmail(UserEmailOptions userEmailOptions);
+        Task SendEmailForgotPassword(UserEmailOptions userEmailOptions);
     }
 }
